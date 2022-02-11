@@ -9,14 +9,12 @@ const createRouter = (dependencies) => {
     router.route('/')
         .post(async (req, res) => {
             const result = await controller.createAccount(req);
-                    res.json(result)
+            res.json(result)
         })
-    router.route('/:id').get(async (req, res) => {
-               const result = await controller.getAccount(req.params.id);
-                res.json(result)
-    })
-        r;
-        
-    
+        router.route('/:id').get(async (req, res) => {
+            const result = await controller.getAccount(req.params.id);
+            res.json(result)
+        })
+    return router;
 }
- default createRouter;    
+export default createRouter;

@@ -7,9 +7,7 @@ const start = async () => {
 
   try {
     await bootstrap.init();
-
-    const app = await createServer(dependencies());
-    
+    await createServer(dependencies());
     console.log('Server running');
   } catch (err) {
     console.log(err);

@@ -1,4 +1,3 @@
-import Account from '../../../entities/Account'
 import AccountRepository from '../../../entities/Repository'
 
 export default class extends AccountRepository {
@@ -45,4 +44,4 @@ export default class extends AccountRepository {
     return Promise.resolve(this._dataAsArray());
   }
 
-};
+}
