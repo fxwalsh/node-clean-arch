@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import Sequelize from 'sequelize';
 
 dotenv.config();
 
@@ -24,8 +25,8 @@ export default {
         console.log(`database connected to ${db.name} on ${db.host}`);
       });
     }
-    if (process.env.DATABASE_DIALECT === constants.SUPPORTED_DATABASE.POSTGRES || process.env.DATABASE_DIALECT === constants.SUPPORTED_DATABASE.SQLITE) {
-      const sequelize = require('../orm/sequelize/sequelize');
+    if (process.env.DATABASE_DIALECT === constants.SUPPORTED_DATABASE.MYSQL) {
+      const sequelize = new Sequelize(process.env.DATABASE_URL);
       try {
         await sequelize.sync();
         console.log('Connection to DB has been established successfully.');

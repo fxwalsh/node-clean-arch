@@ -9,7 +9,7 @@ export default class {
       throw new Error('Expect data to be not undefined nor null');
     }
     if (Array.isArray(data)) {
-     return data.map(_serializeSingleUser);
+     return data.map(serializeSingleUser);
     }
     return serializeSingleUser(data);
   }
