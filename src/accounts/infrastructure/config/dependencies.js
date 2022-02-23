@@ -6,7 +6,6 @@ import AccountsRepositoryInMemory from '../repositories/in-memory/AccountsReposi
 import AccountsRepositoryMongo from '../repositories/mongo/AccountsRepositoryMongo';
 
 const buildDependencies = () => {
-  console.log("dep:" + process.env.DATABASE_DIALECT)
   const dependencies = {
     // accessTokenManager: new JwtAccessTokenManager(),
     accountsSerializer: new AccountsSerializer(),
@@ -21,9 +20,8 @@ const buildDependencies = () => {
     throw new Error('Add PostgreSQL support');
   } else {
     const UserRepositorySQLite = require('../repositories/UserRepositorySQLite');
-    beans.userRepository = new UserRepositorySQLite();
+    dependencies.accountsRepository = new UserRepositorySQLite();
   }
-
   return dependencies;
 }
 

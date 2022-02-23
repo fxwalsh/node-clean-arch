@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import AccountsController from "../../../src/accounts/interfaces/AccountsController";
 import AccountUseCases from "../../../src/accounts/useCases/Account";
 import AccountsSerializer from "../../../src/accounts/interfaces/AccountsSerializer";
@@ -7,21 +8,20 @@ import 'should';
 describe('Create Account Controller', function () {
     let request;
     let registeredAccount;
-    let accounts;
     let dependencies;
+   
     beforeEach(() => {
         sinon.restore();
         request = {
             body: { firstName: 'John', lastName: 'Doe', email: 'john.doe@email.com', password: 'tester' }
         }
-        dependencies= { accountsSerializer: new AccountsSerializer()}
-        registeredAccount = {'id': 123, 'firstName': 'John', 'lastName': 'Doe', 'email': 'john.doe@email.com'};
-        accounts = [{'id': 123, 'firstName': 'John', 'lastName': 'Doe', 'email': 'john.doe@email.com'},
-        {'id': 456, 'firstName': 'Jane', 'lastName': 'Doe', 'email': 'jane.doe@email.com'}]
+        dependencies = { accountsSerializer: new AccountsSerializer() }
+        registeredAccount = { 'id': 123, 'firstName': 'John', 'lastName': 'Doe', 'email': 'john.doe@email.com' };
+      
     });
 
     it('should resolve with the newly persisted account (augmented with an ID)', async function () {
-        sinon.stub(AccountUseCases,'registerAccount').returns({ firstName: 'John', lastName: 'Doe', email: 'john.doe@email.com', password: 'tester',id:123});
+        sinon.stub(AccountUseCases, 'registerAccount').returns({ firstName: 'John', lastName: 'Doe', email: 'john.doe@email.com', password: 'tester', id: 123 });
         const controller = AccountsController(dependencies);
         const account = await controller.registerAccount(request);
         account.id.should.equal(registeredAccount.id);
@@ -30,7 +30,7 @@ describe('Create Account Controller', function () {
     });
 
     it('should find all accounts', async function () {
-        sinon.stub(AccountUseCases,'find').returns([{firstName: 'John', lastName: 'Doe', email: 'john.doe@email.com', password: 'tester',id:123},{firstName: 'Jane', lastName: 'Doe', email: 'jane.doe@email.com', password: 'tester',id:456}]);
+        sinon.stub(AccountUseCases, 'find').returns([{ firstName: 'John', lastName: 'Doe', email: 'john.doe@email.com', password: 'tester', id: 123 }, { firstName: 'Jane', lastName: 'Doe', email: 'jane.doe@email.com', password: 'tester', id: 456 }]);
         const controller = AccountsController(dependencies);
         const accounts = await controller.find();
         accounts.length.should.equal(2);
@@ -38,7 +38,7 @@ describe('Create Account Controller', function () {
     });
 
     it('should update an existing persisted account', async function () {
-        sinon.stub(AccountUseCases,'updateAccount').returns({ firstName: 'John', lastName: 'Doe', email: 'john.doe@email.com', password: 'tester',id:123});
+        sinon.stub(AccountUseCases, 'updateAccount').returns({ firstName: 'John', lastName: 'Doe', email: 'john.doe@email.com', password: 'tester', id: 123 });
         const controller = AccountsController(dependencies);
         const account = await controller.updateAccount(request);
         account.id.should.equal(registeredAccount.id);

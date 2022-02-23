@@ -1,26 +1,24 @@
-export default  class {
 
-  persist(account) {
+export default class {
+
+  find(query) {
     throw new Error('ERR_METHOD_NOT_IMPLEMENTED');
   }
 
-  merge(account) {
+  get(movieId) {
     throw new Error('ERR_METHOD_NOT_IMPLEMENTED');
   }
 
-  remove(accountId) {
+  getReviews(movieId) {
     throw new Error('ERR_METHOD_NOT_IMPLEMENTED');
   }
 
-  get(accountId) {
+  addReview(movieId, review) {
     throw new Error('ERR_METHOD_NOT_IMPLEMENTED');
   }
 
-  getByEmail(email) {
+  findUpcoming(query) {
     throw new Error('ERR_METHOD_NOT_IMPLEMENTED');
   }
 
-  find() {
-    throw new Error('ERR_METHOD_NOT_IMPLEMENTED');
-  }
 }

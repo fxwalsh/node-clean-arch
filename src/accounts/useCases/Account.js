@@ -12,7 +12,7 @@ export default {
     return accountsRepository.find();
   },
   findByEmail: (email, accountsRepository)=>{
-    return accountsRepository,getByEmail(email);
+    return accountsRepository.getByEmail(email);
   },
   updateAccount: (firstName, lastName, email, password, accountsRepository)=>{
     const account = new Account(null, firstName, lastName, email, password);

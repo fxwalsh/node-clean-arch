@@ -7,5 +7,4 @@ export default class {
       this.email = email;
       this.password = password;
     }
-  
   }
