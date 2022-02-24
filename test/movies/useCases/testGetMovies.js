@@ -13,7 +13,7 @@ describe('Get a List of Movies', function () {
   });
 
   it('should get a list of movies', async function () {
-    const movies = await moviesUseCases.find(null, moviesRepository);
+    const movies = await moviesUseCases.find(undefined, moviesRepository);
     movies.page.should.equal(1);
     movies.results.length.should.equal(20)
   });
@@ -28,5 +28,11 @@ describe('Get a List of Movies', function () {
     const reviews = await moviesUseCases.getReviews(testMovie.movieId, moviesRepository);
     reviews.length.should.be.aboveOrEqual(1);
 
+  });
+
+  it('should get upcoming movies', async function () {
+    const movies = await moviesUseCases.findUpcoming(undefined, moviesRepository);
+    movies.page.should.equal(1);
+    movies.results.length.should.equal(20);
   });
 })

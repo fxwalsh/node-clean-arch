@@ -1,6 +1,8 @@
 export default class {
 
-    constructor(id = null, firstName, lastName, email, password) {
+    constructor(id = undefined, firstName, lastName, email, password) {
+      //let {error} = validator({id, firstName, lastName, email, password})
+     // if (error) throw new Error(error)
       this.id = id;
       this.firstName = firstName;
       this.lastName = lastName;

@@ -2,7 +2,7 @@ import Account from '../entities/Account';
 
 export default {
   registerAccount: (firstName, lastName, email, password, accountsRepository) => {
-    const account = new Account(null, firstName, lastName, email, password);
+    const account = new Account(undefined, firstName, lastName, email, password);
     return accountsRepository.persist(account);
   },
   getAccount: (accountId, accountsRepository) => {

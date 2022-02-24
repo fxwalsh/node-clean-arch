@@ -16,7 +16,6 @@ export default class extends AccountRepository {
     }
 
     async persist(accountEntity) {
-        console.log(accountEntity)
         const { firstName, lastName, email, password } = accountEntity;
         const mongooseAccount = new this.model({ firstName, lastName, email, password });
         await mongooseAccount.save();
@@ -39,7 +38,9 @@ export default class extends AccountRepository {
     }
 
     async getByEmail(userEmail) {
-        const mongooseAccount = await this.model.find({ email: userEmail });
+        console.log(userEmail)
+        const mongooseAccount = await this.model.findOne({email: userEmail});
+        console.log(mongooseAccount)
         return new Account(mongooseAccount.id, mongooseAccount.firstName, mongooseAccount.lastName, mongooseAccount.email, mongooseAccount.password);
     }
 

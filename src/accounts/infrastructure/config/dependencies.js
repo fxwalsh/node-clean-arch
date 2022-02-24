@@ -1,13 +1,13 @@
 import constants from './constants';
 //import  environment from './environment';
-// const JwtAccessTokenManager = require('../security/JwtAccessTokenManager');
+import JWTTokenManager from '../security/JWTTokenManager';
 import AccountsSerializer from '../../interfaces/AccountsSerializer';
 import AccountsRepositoryInMemory from '../repositories/in-memory/AccountsRepositoryInMemory';
 import AccountsRepositoryMongo from '../repositories/mongo/AccountsRepositoryMongo';
 
 const buildDependencies = () => {
   const dependencies = {
-    // accessTokenManager: new JwtAccessTokenManager(),
+    accessTokenManager: new JWTTokenManager(),
     accountsSerializer: new AccountsSerializer(),
   };
 
@@ -22,6 +22,7 @@ const buildDependencies = () => {
     const UserRepositorySQLite = require('../repositories/UserRepositorySQLite');
     dependencies.accountsRepository = new UserRepositorySQLite();
   }
+
   return dependencies;
 }
 

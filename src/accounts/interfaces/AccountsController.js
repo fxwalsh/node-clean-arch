@@ -5,7 +5,7 @@ export default (dependencies) => {
 
     const { accountsRepository, accountsSerializer } = dependencies;
 
-    const registerAccount = async (request) => {
+    const createAccount = async (request) => {
         // Input
         const { firstName, lastName, email, password } = request.body;
         // Treatment
@@ -36,7 +36,7 @@ export default (dependencies) => {
     }
 
     return {
-        registerAccount,
+        createAccount,
         getAccount,
         find,
         updateAccount

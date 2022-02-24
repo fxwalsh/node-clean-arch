@@ -20,7 +20,7 @@ describe('Create Account Use Case', function() {
       const persist = sinon.stub( mockUserRepository, 'persist').resolves(persistedAccount);
       const account = await AccountUseCases.registerAccount('John', 'Doe', 'john.doe@email.com', 'tester', mockUserRepository );
       account.should.equal(persistedAccount);
-      sinon.assert.calledWith(persist, new Account(null, 'John', 'Doe', 'john.doe@email.com', 'tester'));
+      sinon.assert.calledWith(persist, new Account(undefined, 'John', 'Doe', 'john.doe@email.com', 'tester'));
     });
 
     it('should find all accountns', async function() {
