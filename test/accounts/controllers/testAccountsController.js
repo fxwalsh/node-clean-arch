@@ -23,7 +23,7 @@ describe('Create Account Controller', function () {
     it('should resolve with the newly persisted account (augmented with an ID)', async function () {
         sinon.stub(AccountUseCases, 'registerAccount').returns({ firstName: 'John', lastName: 'Doe', email: 'john.doe@email.com', password: 'tester', id: 123 });
         const controller = AccountsController(dependencies);
-        const account = await controller.registerAccount(request);
+        const account = await controller.createAccount(request);
         account.id.should.equal(registeredAccount.id);
         account['firstName'].should.equal(registeredAccount['firstName']);
         //sinon.assert.calledWith(persist, new Account(null, 'John', 'Doe', 'john.doe@email.com', 'tester'));

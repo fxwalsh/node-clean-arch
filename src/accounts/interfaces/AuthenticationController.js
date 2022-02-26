@@ -3,13 +3,13 @@ import SecurityUseCases from "../useCases/Security";
 
 export default (dependencies) => {
 
-    const { accountsRepository, accessTokenManager } = dependencies;
+    const { accountsRepository, accessTokenManager, encryptionService } = dependencies;
 
     const getAccessToken = async (request) => {
         // Input
         const { email, password } = request.body;
         // Treatment
-        const token = await SecurityUseCases.authenticate(email, password, accountsRepository, accessTokenManager);
+        const token = await SecurityUseCases.authenticate(email, password, accountsRepository, accessTokenManager, encryptionService);
       
         //output
         return token;

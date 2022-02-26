@@ -4,11 +4,13 @@ import JWTTokenManager from '../security/JWTTokenManager';
 import AccountsSerializer from '../../interfaces/AccountsSerializer';
 import AccountsRepositoryInMemory from '../repositories/in-memory/AccountsRepositoryInMemory';
 import AccountsRepositoryMongo from '../repositories/mongo/AccountsRepositoryMongo';
+import EncryptionService from '../security/BCryptService';
 
 const buildDependencies = () => {
   const dependencies = {
     accessTokenManager: new JWTTokenManager(),
     accountsSerializer: new AccountsSerializer(),
+    encryptionService: new EncryptionService()
   };
 
   if (process.env.DATABASE_DIALECT === constants.SUPPORTED_DATABASE.IN_MEMORY) {

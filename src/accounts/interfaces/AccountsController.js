@@ -3,13 +3,13 @@ import AccountUseCases from "../useCases/Account";
 
 export default (dependencies) => {
 
-    const { accountsRepository, accountsSerializer } = dependencies;
+    const { accountsRepository, accountsSerializer, encryptionService } = dependencies;
 
     const createAccount = async (request) => {
         // Input
         const { firstName, lastName, email, password } = request.body;
         // Treatment
-        const account = await AccountUseCases.registerAccount(firstName, lastName, email, password, accountsRepository);
+        const account = await AccountUseCases.registerAccount(firstName, lastName, email, password, accountsRepository, encryptionService);
         //output
         return accountsSerializer.serialize(account);
     }

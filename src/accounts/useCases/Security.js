@@ -1,9 +1,9 @@
 export default {
-    authenticate: async (email, password, userRepository, accessTokenManager) => {
-        console.log(email)
+    authenticate: async (email, password, userRepository, accessTokenManager, encryptionService) => {
+       
         const user = await userRepository.getByEmail(email);
-        console.log(user)
-        if (!user || user.password !== password) {
+       
+        if (!encryptionService.compare(password,user.password)) {
             throw new Error('Bad credentials');
         }
         return accessTokenManager.generate({ email: user.email });
