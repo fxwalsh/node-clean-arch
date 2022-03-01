@@ -5,30 +5,30 @@ export default (dependencies) => {
 
     const { accountsRepository, accessTokenManager, encryptionService } = dependencies;
 
-    const getAccessToken = async (request) => {
+    const getAccessToken = async (request, response, next) => {
         // Input
         const { email, password } = request.body;
         // Treatment
         const token = await SecurityUseCases.authenticate(email, password, accountsRepository, accessTokenManager, encryptionService);
       
         //output
-        return token;
+        response.status(200).json({token : token});
 
 
     }
 
-    const verifyAccessToken = async (request) => {
+    const verifyAccessToken = async (request, response, next) => {
 
         // Input
         const authHeader = request.headers.authorization;
         // Treatment
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
-            throw Error('Missing or wrong Authorization request header');
+            response.status(403).json({message:"Forbidden"})
         }
         const accessToken = authHeader.split(" ")[1];
         const email = await SecurityUseCases.verify(accessToken, accountsRepository, accessTokenManager);
         //output
-        return email;
+        next();
     }
 
     return {

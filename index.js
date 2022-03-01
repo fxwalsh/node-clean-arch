@@ -1,6 +1,6 @@
 import bootstrap from './src/accounts/infrastructure/config/bootstrap'
 import dependencies from './src/accounts/infrastructure/config/dependencies'
-import createServer from "./src/accounts/infrastructure/server/server"
+import createServer from "./src/servers/server"
 
 // Start the server
 const start = async () => {

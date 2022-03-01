@@ -5,12 +5,14 @@ import AccountsSerializer from '../../interfaces/AccountsSerializer';
 import AccountsRepositoryInMemory from '../repositories/in-memory/AccountsRepositoryInMemory';
 import AccountsRepositoryMongo from '../repositories/mongo/AccountsRepositoryMongo';
 import EncryptionService from '../security/BCryptService';
+import MoviesRepository from './../../../movies/infrastructure/repositories/TMDBProxy'
 
 const buildDependencies = () => {
   const dependencies = {
     accessTokenManager: new JWTTokenManager(),
     accountsSerializer: new AccountsSerializer(),
-    encryptionService: new EncryptionService()
+    encryptionService: new EncryptionService(),
+    moviesRepository: new MoviesRepository()
   };
 
   if (process.env.DATABASE_DIALECT === constants.SUPPORTED_DATABASE.IN_MEMORY) {

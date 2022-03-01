@@ -4,9 +4,11 @@ import SecurityUseCases from "../../../src/accounts/useCases/Security";
 import AccountsSerializer from "../../../src/accounts/interfaces/AccountsSerializer";
 import sinon from 'sinon';
 import 'should';
+import { mockRequest, mockResponse } from 'mock-req-res'
 
 describe('Authentication Controller', function () {
     let request;
+    let response;
     let registeredAccount;
     let dependencies;
     let token;
@@ -14,9 +16,10 @@ describe('Authentication Controller', function () {
 
     beforeEach(() => {
         sinon.restore();
-        request = {
+        request = mockRequest({
             body: { email: 'john.doe@email.com', password: 'tester' }
-        }
+        })
+        response = mockResponse();
         token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9'
         verifyRequest = {
             body: {},
@@ -32,17 +35,16 @@ describe('Authentication Controller', function () {
     it('should authenticate account', async function () {
         sinon.stub(SecurityUseCases, 'authenticate').returns(token);
         const controller = AuthenticationController(dependencies);
-        const result = await controller.getAccessToken(request);
-        result.should.equal(token);
+        controller.getAccessToken(request,response);
+        response.status.calledWith(201);
+        response.json.calledWith({token: token});
 
     });
 
     it('should verify account', async function () {
         sinon.stub(SecurityUseCases, 'verify').returns(registeredAccount.email);
         const controller = AuthenticationController(dependencies);
-        const result = await controller.verifyAccessToken(verifyRequest);
-        result.should.equal(registeredAccount.email);
-
+        await controller.verifyAccessToken(verifyRequest, response,()=>{} );
     });
 
 });

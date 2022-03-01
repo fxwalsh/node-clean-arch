@@ -1,20 +1,20 @@
 import Review from '../entities/Review';
 
 export default {
-  getMovie: (movieId, moviesRepository) => {
+  getMovie: (movieId, {moviesRepository}) => {
     return moviesRepository.get(movieId);
   },
-  find: (query, moviesRepository) => {
+  find: (query, {moviesRepository}) => {
     return moviesRepository.find(query);
   },
-  findUpcoming: (query, moviesRepository) => {
+  findUpcoming: (query, {moviesRepository}) => {
     return moviesRepository.findUpcoming(query);
   },
-  addReview: (movieId, author, content, moviesRepository) => {
+  addReview: (movieId, author, content, {moviesRepository}) => {
     const review = new Review(author, content);
     return moviesRepository.addReview(movieId, review);
   },
-  getReviews: (movieId, moviesRepository) => {
+  getReviews: (movieId, {moviesRepository}) => {
     return moviesRepository.getReviews(movieId);
   }
 }

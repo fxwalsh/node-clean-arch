@@ -38,9 +38,7 @@ export default class extends AccountRepository {
     }
 
     async getByEmail(userEmail) {
-        console.log(userEmail)
         const mongooseAccount = await this.model.findOne({email: userEmail});
-        console.log(mongooseAccount)
         return new Account(mongooseAccount.id, mongooseAccount.firstName, mongooseAccount.lastName, mongooseAccount.email, mongooseAccount.password);
     }
 
