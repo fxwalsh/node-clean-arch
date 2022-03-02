@@ -21,12 +21,14 @@ export default (dependencies) => {
 
         // Input
         const authHeader = request.headers.authorization;
+
         // Treatment
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
             response.status(403).json({message:"Forbidden"})
         }
         const accessToken = authHeader.split(" ")[1];
-        const email = await SecurityUseCases.verify(accessToken, accountsRepository, accessTokenManager);
+        await SecurityUseCases.verify(accessToken, accountsRepository, accessTokenManager);
+
         //output
         next();
     }

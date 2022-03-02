@@ -14,9 +14,6 @@ const createMoviesRouter = (dependencies) => {
     router.route('/')
         .get(authenticationController.verifyAccessToken,moviesController.find)
 
-
-
-
     return router;
 }
 export default createMoviesRouter;
