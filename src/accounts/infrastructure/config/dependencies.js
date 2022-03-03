@@ -25,8 +25,8 @@ const buildDependencies = () => {
   } else if (process.env.DATABASE_DIALECT === constants.SUPPORTED_DATABASE.POSTGRES) {
     throw new Error('Add PostgreSQL support');
   } else {
-    const UserRepositorySQLite = require('../repositories/UserRepositorySQLite');
-    dependencies.accountsRepository = new UserRepositorySQLite();
+    const UserRepositoryMYSQL = require('./../repositories/sql/AccountsRepositoryMYSQL');
+    dependencies.accountsRepository = new UserRepositoryMYSQL();
   }
 
   return dependencies;

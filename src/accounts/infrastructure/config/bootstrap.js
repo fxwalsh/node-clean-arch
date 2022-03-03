@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import Sequelize from 'sequelize';
+import mysql from 'mysql2/promise';
 
 dotenv.config();
 
@@ -26,8 +27,17 @@ export default {
       });
     }
     if (process.env.DATABASE_DIALECT === constants.SUPPORTED_DATABASE.MYSQL) {
-      const sequelize = new Sequelize(process.env.DATABASE_URL);
+     
+      const sequelize = new Sequelize("","root","ilikecake",{host:"localhost", dialect: "mysql"} );
       try {
+        //const connection = await mysql.createConnection({
+        //  host: "localhost",
+       //   user: "root",
+       //   password: "ilikecake"
+       // });
+        
+        let DBName = "movies_db"
+        await sequelize.query("CREATE DATABASE IF NOT EXISTS `"+DBName+"`;")
         await sequelize.sync();
         console.log('Connection to DB has been established successfully.');
       } catch (err) {

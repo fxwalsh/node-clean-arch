@@ -1,23 +1,49 @@
-'use strict';
+import Sequelize from 'sequelize'
+import Account from '../../../entities/Account'
+import AccountRepository from '../../../entities/Repository'
 
-import sequelize from 'sequelize'
-const User = require('../../domain/User');
-const UserRepository = require('../../domain/UserRepository');
-
-module.exports = class extends UserRepository {
+module.exports = class extends AccountRepository {
 
   constructor() {
     super();
-    this.db = sequelize;
-    this.model = this.db.model('user');
+    // Constucts ORM in contstuctor. Probably would be better in separate module to be honest!
+    try{
+    const db = new Sequelize("movies_db", "root", "ilikecake", { host: "localhost", dialect: "mysql" });
+
+    db.define('account', {
+      // Name of Column #1 and its properties defined: id
+      id: {
+        // Integer Datatype
+        type: Sequelize.UUID,
+        // To uniquely identify user
+        primaryKey: true
+      },
+      // Name of Column #2: name
+      firstName: { type: Sequelize.STRING, allowNull: false },
+      // Name of Column #3: name
+      lastName: { type: Sequelize.STRING, allowNull: false },
+
+      // Name of Column #3: email
+      email: { type: Sequelize.STRING, allowNull: false },
+
+      // Name of Column #3: email
+      password: { type: Sequelize.STRING, allowNull: false },
+    })
+    db.query("CREATE TRIGGER before_insert_movie BEFORE INSERT ON accounts FOR EACH ROW SET new.id = uuid();")
+    this.model = db.model('account');
+    db.sync()
+  }catch(error){
+    console.log("ERROR"+error)
+  }
   }
 
   async persist(userEntity) {
     const { firstName, lastName, email, password } = userEntity;
+    console.log(firstName)
     const seqUser = await this.model.create({ firstName, lastName, email, password });
-    await seqUser.save();
-
-    return new User(seqUser.id, seqUser.firstName, seqUser.lastName, seqUser.email, seqUser.password);
+    const result = await seqUser.save();
+    console.log(result)
+    return new Account(seqUser.id, seqUser.firstName, seqUser.lastName, seqUser.email, seqUser.password);
   }
 
   async merge(userEntity) {
@@ -28,7 +54,7 @@ module.exports = class extends UserRepository {
     const { firstName, lastName, email, password } = userEntity;
     await seqUser.update({ firstName, lastName, email, password });
 
-    return new User(seqUser.id, seqUser.firstName, seqUser.lastName, seqUser.email, seqUser.password);
+    return new Account(seqUser.id, seqUser.firstName, seqUser.lastName, seqUser.email, seqUser.password);
   }
 
   async remove(userId) {
@@ -41,18 +67,18 @@ module.exports = class extends UserRepository {
 
   async get(userId) {
     const seqUser = await this.model.findByPk(userId);
-    return new User(seqUser.id, seqUser.firstName, seqUser.lastName, seqUser.email, seqUser.password);
+    return new Account(seqUser.id, seqUser.firstName, seqUser.lastName, seqUser.email, seqUser.password);
   }
 
   async getByEmail(userEmail) {
     const seqUser = await this.model.findOne({ where: { email: userEmail } });
-    return new User(seqUser.id, seqUser.firstName, seqUser.lastName, seqUser.email, seqUser.password);
+    return new Account(seqUser.id, seqUser.firstName, seqUser.lastName, seqUser.email, seqUser.password);
   }
 
   async find() {
     const seqUsers = await this.model.findAll();
     return seqUsers.map((seqUser) => {
-      return new User(seqUser.id, seqUser.firstName, seqUser.lastName, seqUser.email, seqUser.password);
+      return new Account(seqUser.id, seqUser.firstName, seqUser.lastName, seqUser.email, seqUser.password);
     });
   }
 

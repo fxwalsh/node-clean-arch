@@ -12,7 +12,7 @@ export default (dependencies) => {
         } catch (err) {
             //* Pass err to next
             //! If validation error occurs call next with HTTP 422. Otherwise HTTP 500
-            next(new Error( {message: err.message}))
+            next(new Error( err.message))
         }
     }
 
