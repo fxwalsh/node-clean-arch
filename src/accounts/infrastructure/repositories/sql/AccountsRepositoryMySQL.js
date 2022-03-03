@@ -1,4 +1,4 @@
-import Sequelize from 'sequelize'
+import sequelize from './sequelize'
 import Account from '../../../entities/Account'
 import AccountRepository from '../../../entities/Repository'
 
@@ -8,30 +8,11 @@ module.exports = class extends AccountRepository {
     super();
     // Constucts ORM in contstuctor. Probably would be better in separate module to be honest!
     try{
-    const db = new Sequelize("movies_db", "root", "ilikecake", { host: "localhost", dialect: "mysql" });
-
-    db.define('account', {
-      // Name of Column #1 and its properties defined: id
-      id: {
-        // Integer Datatype
-        type: Sequelize.UUID,
-        // To uniquely identify user
-        primaryKey: true
-      },
-      // Name of Column #2: name
-      firstName: { type: Sequelize.STRING, allowNull: false },
-      // Name of Column #3: name
-      lastName: { type: Sequelize.STRING, allowNull: false },
-
-      // Name of Column #3: email
-      email: { type: Sequelize.STRING, allowNull: false },
-
-      // Name of Column #3: email
-      password: { type: Sequelize.STRING, allowNull: false },
-    })
-    db.query("CREATE TRIGGER before_insert_movie BEFORE INSERT ON accounts FOR EACH ROW SET new.id = uuid();")
+    //const db = new Sequelize("movies_db", "root", "ilikecake", { host: "localhost", dialect: "mysql" });
+    const db = sequelize.connect(process.env.DATABASE_URL);
+    
+   // db.sync()
     this.model = db.model('account');
-    db.sync()
   }catch(error){
     console.log("ERROR"+error)
   }

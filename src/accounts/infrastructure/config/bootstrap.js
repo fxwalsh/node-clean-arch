@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
-import mongoose from 'mongoose';
-import Sequelize from 'sequelize';
-import mysql from 'mysql2/promise';
+import mongoose from 'mongoose';;
+import sequelize from './../repositories/sql/sequelize'
 
 dotenv.config();
 
@@ -27,18 +26,18 @@ export default {
       });
     }
     if (process.env.DATABASE_DIALECT === constants.SUPPORTED_DATABASE.MYSQL) {
-     
-      const sequelize = new Sequelize("","root","ilikecake",{host:"localhost", dialect: "mysql"} );
+     const db = sequelize.connect(process.env.DATABASE_URL)
+     // const sequelize = new Sequelize("","root","ilikecake",{host:"localhost", dialect: "mysql"} );
       try {
         //const connection = await mysql.createConnection({
         //  host: "localhost",
        //   user: "root",
        //   password: "ilikecake"
        // });
-        
-        let DBName = "movies_db"
-        await sequelize.query("CREATE DATABASE IF NOT EXISTS `"+DBName+"`;")
-        await sequelize.sync();
+      await db.sync();
+       // let DBName = "movies_db"
+       // await sequelize.query("CREATE DATABASE IF NOT EXISTS `"+DBName+"`;")
+     //  db.query("CREATE TRIGGER add_uuid BEFORE INSERT ON accounts FOR EACH ROW SET new.id = uuid();")
         console.log('Connection to DB has been established successfully.');
       } catch (err) {
         console.error('Unable to connect to the database:', err);
