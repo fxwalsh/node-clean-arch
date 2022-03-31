@@ -10,7 +10,6 @@ export default (dependencies) => {
         const { email, password } = request.body;
         // Treatment
         const token = await SecurityUseCases.authenticate(email, password, accountsRepository, accessTokenManager, encryptionService);
-      
         //output
         response.status(200).json({token : token});
 

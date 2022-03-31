@@ -8,10 +8,7 @@ module.exports = class extends AccountRepository {
     super();
     // Constucts ORM in contstuctor. Probably would be better in separate module to be honest!
     try{
-    //const db = new Sequelize("movies_db", "root", "ilikecake", { host: "localhost", dialect: "mysql" });
     const db = sequelize.connect(process.env.DATABASE_URL);
-    
-   // db.sync()
     this.model = db.model('account');
   }catch(error){
     console.log("ERROR"+error)

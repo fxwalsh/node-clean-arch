@@ -1,5 +1,4 @@
 export default class {
-
     constructor(id = undefined, firstName, lastName, email, password) {
       this.id = id;
       this.firstName = firstName;
