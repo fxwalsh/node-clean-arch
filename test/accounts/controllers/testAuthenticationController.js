@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
-import AuthenticationController from "../../../src/accounts/interfaces/AuthenticationController";
+import AuthenticationController from "../../../src/accounts/controllers/AuthenticationController";
 import SecurityUseCases from "../../../src/accounts/useCases/Security";
-import AccountsSerializer from "../../../src/accounts/interfaces/AccountsSerializer";
+import AccountsSerializer from "../../../src/accounts/controllers/AccountsSerializer";
 import sinon from 'sinon';
 import 'should';
 import { mockRequest, mockResponse } from 'mock-req-res'

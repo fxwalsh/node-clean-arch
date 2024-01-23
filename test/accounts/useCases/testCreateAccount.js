@@ -1,6 +1,6 @@
 import Account from '../../../src/accounts/entities/Account';
-import AccountRepository from '../../../src/accounts/entities/Repository';
-import EncryptionService from '../../../src/accounts/entities/Encryption';
+import AccountRepository from '../../../src/accounts/Repository';
+import EncryptionService from '../../../src/accounts/Encryption';
 import AccountUseCases from '../../../src/accounts/useCases/Account';
 import sinon from 'sinon';
 import 'should';

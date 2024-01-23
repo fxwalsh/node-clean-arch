@@ -1,7 +1,7 @@
 import express from 'express';
-import AccountsController from '../accounts/interfaces/AccountsController';
-import AuthenticationController from '../accounts/interfaces/AuthenticationController';
-import ValidationController from '../accounts/interfaces/ValidationController';
+import AccountsController from '../accounts/controllers/AccountsController';
+import AuthenticationController from '../accounts/controllers/AuthenticationController';
+import ValidationController from '../accounts/controllers/ValidationController';
 
 const createRouter = (dependencies) => {
     const router = express.Router();

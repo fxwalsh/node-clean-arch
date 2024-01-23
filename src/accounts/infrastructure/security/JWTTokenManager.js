@@ -2,7 +2,7 @@
 
 import jwt from 'jsonwebtoken';
 
-import SecurityContract  from '../../useCases/SecurityContract';
+import SecurityContract  from '../../SecurityToken';
  
 const JWT_SECRET_KEY = 'ilikecake';
 

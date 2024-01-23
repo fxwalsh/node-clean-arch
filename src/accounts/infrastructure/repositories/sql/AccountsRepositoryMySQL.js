@@ -7,12 +7,12 @@ module.exports = class extends AccountRepository {
   constructor() {
     super();
     // Constucts ORM in contstuctor. Probably would be better in separate module to be honest!
-    try{
-    const db = sequelize.connect(process.env.DATABASE_URL);
-    this.model = db.model('account');
-  }catch(error){
-    console.log("ERROR"+error)
-  }
+    try {
+      const db = sequelize.connect(process.env.DATABASE_URL);
+      this.model = db.model('account');
+    } catch (error) {
+      console.log("ERROR" + error)
+    }
   }
 
   async persist(userEntity) {

@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
-import mongoose from 'mongoose';;
-import sequelize from './../repositories/sql/sequelize'
+import mongoose from 'mongoose';
+import sequelize from './../repositories/sql/sequelize';
 
 dotenv.config();
 

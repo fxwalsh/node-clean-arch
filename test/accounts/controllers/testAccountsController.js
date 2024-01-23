@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
-import AccountsController from "../../../src/accounts/interfaces/AccountsController";
+import AccountsController from "../../../src/accounts/controllers/AccountsController";
 import AccountUseCases from "../../../src/accounts/useCases/Account";
-import AccountsSerializer from "../../../src/accounts/interfaces/AccountsSerializer";
+import AccountsSerializer from "../../../src/accounts/controllers/AccountsSerializer";
 import sinon from 'sinon';
 import 'should';
 import { mockRequest, mockResponse } from 'mock-req-res'
@@ -17,7 +17,8 @@ describe('Create Account Controller', function () {
             body: { firstName: 'John', lastName: 'Doe', email: 'john.doe@email.com', password: 'tester' }
         })
         response = mockResponse();
-        dependencies = { accountsSerializer: new AccountsSerializer() }
+       // dependencies = { accountsSerializer: new AccountsSerializer() }
+       dependencies = { accountsSerializer: new AccountsSerializer() }
     });
 
     it('should resolve with the newly persisted account (augmented with an ID)', async function () {

@@ -1,5 +1,5 @@
 
-import EncryptionService from '../../entities/Encryption'
+import EncryptionService from '../../Encryption'
 import bcrypt from 'bcryptjs';
 
 export default class extends EncryptionService {
